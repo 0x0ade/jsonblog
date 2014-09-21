@@ -23,11 +23,11 @@ The post specific configuration file must define the post ID as the output file 
 Alternatively, the post specific configuration files can have post specific output paths.
 
 All HTML / XML comments in the following format:
-        <!-- jsonblog.value -->
+                <!-- jsonblog.value -->
 are replaced by their respective values. For example, if the following line exists in the highest-priority config.json ...
-        "post.title": "Hello, World!"
+                "post.title": "Hello, World!"
 ..., all occurences of ...
-        <!-- jsonblog.post.title -->
+                <!-- jsonblog.post.title -->
 ... in the base file, no matter where, will be replaced with the value.
 
 It is advised to look at the example jsonblog setup and it's output (in the same repository) listed above.
