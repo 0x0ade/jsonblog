@@ -10,8 +10,8 @@ Usage:
 Or:
         java -jar jsonblog.jar config.json
 
-Example jsonblog setup: (AngelDE98's Website on GitHub)[https://github.com/AngelDE98/AngelDE98.github.io]
-Example result: (AngelDE98's Website on GitHub Pages)[http://angelde98.github.io]
+Example jsonblog setup: [AngelDE98's Website on GitHub](https://github.com/AngelDE98/AngelDE98.github.io)
+Example result: [AngelDE98's Website on GitHub Pages](http://angelde98.github.io)
 
 Explaination:
 All paths in the configuration .json files are relative to the directory the above command was launched in.
