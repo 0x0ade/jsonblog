@@ -23,11 +23,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Utils.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Utils.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/angelde/jsonblog/Utils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2423" max-vertical-offset="3150">
-              <caret line="152" column="39" selection-start-line="152" selection-start-column="39" selection-end-line="152" selection-end-column="39" />
+            <state vertical-scroll-proportion="0.31987077" vertical-offset="0" max-vertical-offset="3150">
+              <caret line="15" column="45" selection-start-line="15" selection-start-column="45" selection-end-line="15" selection-end-column="45" />
               <folding>
                 <element signature="e#4223#4224#0" expanded="true" />
                 <element signature="e#4271#4272#0" expanded="true" />
@@ -46,10 +46,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BlogPost.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="BlogPost.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/angelde/jsonblog/BlogPost.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.5024233" vertical-offset="510" max-vertical-offset="3024">
+            <state vertical-scroll-proportion="0.0" vertical-offset="510" max-vertical-offset="3024">
               <caret line="85" column="46" selection-start-line="85" selection-start-column="46" selection-end-line="85" selection-end-column="46" />
               <folding />
             </state>
@@ -71,9 +71,9 @@
         <option value="$PROJECT_DIR$/src/com/angelde/jsonblog/Main.java" />
         <option value="$PROJECT_DIR$/src/com/angelde/jsonblog/JsonBlog.java" />
         <option value="$PROJECT_DIR$/src/com/angelde/jsonblog/BlogConfig.java" />
-        <option value="$PROJECT_DIR$/src/com/angelde/jsonblog/Utils.java" />
         <option value="$PROJECT_DIR$/src/com/angelde/jsonblog/Blog.java" />
         <option value="$PROJECT_DIR$/src/com/angelde/jsonblog/BlogPost.java" />
+        <option value="$PROJECT_DIR$/src/com/angelde/jsonblog/Utils.java" />
       </list>
     </option>
   </component>
@@ -315,7 +315,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="-11" width="1368" height="780" extended-state="7" />
+    <frame x="-1" y="-11" width="1368" height="780" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -771,14 +771,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/angelde/jsonblog/Utils.java">
+    <entry file="file://$PROJECT_DIR$/src/com/angelde/jsonblog/BlogPost.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2423" max-vertical-offset="3150">
-          <caret line="152" column="39" selection-start-line="152" selection-start-column="39" selection-end-line="152" selection-end-column="39" />
-          <folding>
-            <element signature="e#4223#4224#0" expanded="true" />
-            <element signature="e#4271#4272#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.0" vertical-offset="510" max-vertical-offset="3024">
+          <caret line="85" column="46" selection-start-line="85" selection-start-column="46" selection-end-line="85" selection-end-column="46" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -790,11 +787,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/angelde/jsonblog/BlogPost.java">
+    <entry file="file://$PROJECT_DIR$/src/com/angelde/jsonblog/Utils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.5024233" vertical-offset="510" max-vertical-offset="3024">
-          <caret line="85" column="46" selection-start-line="85" selection-start-column="46" selection-end-line="85" selection-end-column="46" />
-          <folding />
+        <state vertical-scroll-proportion="0.31987077" vertical-offset="0" max-vertical-offset="3150">
+          <caret line="15" column="45" selection-start-line="15" selection-start-column="45" selection-end-line="15" selection-end-column="45" />
+          <folding>
+            <element signature="e#4223#4224#0" expanded="true" />
+            <element signature="e#4271#4272#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
