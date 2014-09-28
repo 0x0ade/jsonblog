@@ -61,12 +61,10 @@ public class Blog {
         }
 
         //read main bases
-        for (JsonValue value = values.child(); value != null; value = value.next()) {
-            String name = value.name();
-            if (name.equals("base") || name.startsWith("base.")) {
-                if (name.length() > 5) {
-                    name = name.substring(5);
-                }
+        JsonValue valuesBases = values.get("bases");
+        if (valuesBases != null) {
+            for (JsonValue value = valuesBases.child(); value != null; value = value.next()) {
+                String name = value.name();
                 String base = value.asString();
                 if (base.length() > 0) {
                     bases.put(name, Utils.readAsString(value.asString()));
@@ -75,12 +73,10 @@ public class Blog {
         }
 
         //read extended post bases
-        for (JsonValue value = valuesPost.child(); value != null; value = value.next()) {
-            String name = value.name();
-            if (name.equals("base") || name.startsWith("base.")) {
-                if (name.length() > 5) {
-                    name = name.substring(5);
-                }
+        JsonValue valuesBasesPost = valuesPost.get("bases");
+        if (valuesBasesPost != null) {
+            for (JsonValue value = valuesBasesPost.child(); value != null; value = value.next()) {
+                String name = value.name();
                 String base = value.asString();
                 if (base.length() > 0) {
                     basesPost.put(name, Utils.readAsString(value.asString()));
@@ -124,12 +120,10 @@ public class Blog {
             }
 
             //read the post-specific bases
-            for (JsonValue value = post.values.child(); value != null; value = value.next()) {
-                String name = value.name();
-                if (name.equals("base") || name.startsWith("base.")) {
-                    if (name.length() > 5) {
-                        name = name.substring(5);
-                    }
+            JsonValue valuesBases = post.values.get("bases");
+            if (valuesBases != null) {
+                for (JsonValue value = valuesBases.child(); value != null; value = value.next()) {
+                    String name = value.name();
                     String base = value.asString();
                     if (base.length() > 0) {
                         post.bases.put(name, Utils.readAsString(value.asString()));
@@ -154,13 +148,13 @@ public class Blog {
     }
 
     public String buildHTML() {
-        String html = bases.get("base");
+        String html = bases.get("main");
         String htmlPosts = "";
 
         //replace the bases
         for (Map.Entry<String, String> entry : bases.entrySet()) {
             String name = entry.getKey();
-            if (name.equals("base")) {
+            if (name.equals("main")) {
                 continue;
             }
             String base = entry.getValue();
@@ -177,9 +171,7 @@ public class Blog {
         html = html.replace("<!-- jsonblog.posts -->", htmlPosts);
 
         //replace any further unset values with the main ones
-        for (JsonValue value = values.child(); value != null; value = value.next()) {
-            html = html.replace("<!-- jsonblog." + value.name() + " -->", Utils.htmlEscape(value.asString()));
-        }
+        html = Utils.replace(values, html);
 
         return html;
     }

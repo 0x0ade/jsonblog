@@ -38,19 +38,19 @@ public final class Utils {
         blog.loadConfigFrom(config);
         blog.loadEntries();
 
-        JsonValue output = blog.values.get("output");
+        JsonValue output = get(blog.values, "output.main");
         if (output != null) {
             saveString(blog.buildHTML(), output.asString());
         }
 
         for (BlogPost post : blog.posts) {
-            JsonValue outputPost = post.values.get("output.post");
+            JsonValue outputPost = get(post.values, "output.posts");
             if (outputPost != null) {
                 saveString(post.buildHTML(), outputPost.asString());
             } else {
-                outputPost = blog.values.get("output.posts");
+                outputPost = get(blog.values, "output.posts");
                 if (outputPost != null) {
-                    saveString(post.buildHTML(), outputPost.asString() + "/" + post.values.getInt("post.id") + ".html");
+                    saveString(post.buildHTML(), outputPost.asString() + "/" + get(post.values, "post.id").asInt() + ".html");
                 }
             }
         }
@@ -125,4 +125,49 @@ public final class Utils {
             return "";
         }
     }
+
+    public static JsonValue get(JsonValue values, String name) {
+        if (values == null) {
+            return null;
+        }
+
+        JsonValue value = values.get(name);
+        if (value != null) {
+            return value;
+        }
+
+        if (!name.contains(".")) {
+            return null;
+        }
+
+        String nameFirst = name.substring(0, name.indexOf("."));
+        value = values.get(nameFirst);
+        if (name.length() != nameFirst.length()) {
+            return get(value, name.substring(nameFirst.length()+1, name.length()));
+        }
+
+        return value;
+    }
+
+    public static String replace(JsonValue values, String html) {
+        return replace(values, html, "");
+    }
+
+    public static String replace(JsonValue values, String html, String prefix) {
+        if (prefix == null) {
+            prefix = "";
+        }
+
+        for (JsonValue value = values.child(); value != null; value = value.next()) {
+            if (value.isObject()) {
+                html = replace(value, html, (prefix.isEmpty()?"":(prefix+"."))+value.name());
+                continue;
+            }
+
+            html = html.replace("<!-- jsonblog."+(prefix.isEmpty()?"":(prefix+"."))+value.name()+" -->", htmlEscape(value.asString()));
+        }
+        return html;
+    }
+
+
 }

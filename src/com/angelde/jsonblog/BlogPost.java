@@ -22,8 +22,7 @@ public class BlogPost implements Comparable<BlogPost> {
 
     @Override
     public int compareTo(BlogPost post) {
-        //return values.getInt("post.id") - post.values.getInt("post.id"); //if sorting normally
-        return post.values.getInt("post.id") - values.getInt("post.id"); //if sorting newest-first
+        return Utils.get(post.values, "post.id").asInt() - Utils.get(values, "post.id").asInt(); //if sorting newest-first
     }
 
     public String buildHTML() {
@@ -36,7 +35,7 @@ public class BlogPost implements Comparable<BlogPost> {
         //replace other existing sections with their bases
         for (Map.Entry<String, String> entry : bases.entrySet()) {
             String name = entry.getKey();
-            if (name.equals("base")) {
+            if (name.equals("main")) {
                 continue;
             }
             String base = entry.getValue();
@@ -44,7 +43,7 @@ public class BlogPost implements Comparable<BlogPost> {
         }
         for (Map.Entry<String, String> entry : blog.basesPost.entrySet()) {
             String name = entry.getKey();
-            if (name.equals("base")) {
+            if (name.equals("main")) {
                 continue;
             }
             String base = entry.getValue();
@@ -52,7 +51,7 @@ public class BlogPost implements Comparable<BlogPost> {
         }
         for (Map.Entry<String, String> entry : blog.bases.entrySet()) {
             String name = entry.getKey();
-            if (name.equals("base") || name.equals("post.more")) {
+            if (name.equals("main") || name.equals("post.more")) {
                 continue;
             }
             String base = entry.getValue();
@@ -70,7 +69,7 @@ public class BlogPost implements Comparable<BlogPost> {
         html = html.replace("<!-- jsonblog.post.content -->", htmlContent);
 
         //replace the description
-        JsonValue description = values.get("post.description");
+        JsonValue description = Utils.get(values, "post.description");
         if (description != null) {
             html = html.replace("<!-- jsonblog.post.description -->", description.asString());
         } else if (content_less != null) {
@@ -82,15 +81,9 @@ public class BlogPost implements Comparable<BlogPost> {
         }
 
         //replace other values
-        for (JsonValue value = values.child(); value != null; value = value.next()) {
-            html = html.replace("<!-- jsonblog." + value.name() + " -->", Utils.htmlEscape(value.asString()));
-        }
-        for (JsonValue value = blog.valuesPost.child(); value != null; value = value.next()) {
-            html = html.replace("<!-- jsonblog." + value.name() + " -->", Utils.htmlEscape(value.asString()));
-        }
-        for (JsonValue value = blog.values.child(); value != null; value = value.next()) {
-            html = html.replace("<!-- jsonblog." + value.name() + " -->", Utils.htmlEscape(value.asString()));
-        }
+        html = Utils.replace(values, html);
+        html = Utils.replace(blog.valuesPost, html);
+        html = Utils.replace(blog.values, html);
 
         return html;
     }
@@ -116,7 +109,7 @@ public class BlogPost implements Comparable<BlogPost> {
         //replace other existing sections with their headless specific bases
         for (Map.Entry<String, String> entry : bases.entrySet()) {
             String name = entry.getKey();
-            if (name.equals("base")) {
+            if (name.equals("main")) {
                 continue;
             }
             if (!name.startsWith("post.headless.")) {
@@ -129,7 +122,7 @@ public class BlogPost implements Comparable<BlogPost> {
 
         for (Map.Entry<String, String> entry : blog.basesPost.entrySet()) {
             String name = entry.getKey();
-            if (name.equals("base")) {
+            if (name.equals("main")) {
                 continue;
             }
             if (!name.startsWith("post.headless.")) {
@@ -142,7 +135,7 @@ public class BlogPost implements Comparable<BlogPost> {
 
         for (Map.Entry<String, String> entry : blog.bases.entrySet()) {
             String name = entry.getKey();
-            if (name.equals("base")) {
+            if (name.equals("main")) {
                 continue;
             }
             if (!name.startsWith("post.headless.")) {
@@ -167,10 +160,7 @@ public class BlogPost implements Comparable<BlogPost> {
         }
         html = html.replace("<!-- jsonblog.post.content -->", htmlContent);
 
-        //replace other values
-        for (JsonValue value = values.child(); value != null; value = value.next()) {
-            html = html.replace("<!-- jsonblog." + value.name() + " -->", Utils.htmlEscape(value.asString()));
-        }
+        html = Utils.replace(values, html);
 
         return html;
     }
