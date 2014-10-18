@@ -60,6 +60,29 @@ public class Blog {
             Utils.closeSilently(fr);
         }
 
+        //read main imports
+        JsonValue valuesImports = values.get("imports");
+        if (valuesImports != null) {
+            for (JsonValue value = valuesImports.child(); value != null; value = value.next()) {
+                if (!value.isString()) {
+                    continue;
+                }
+                String importPath = value.asString();
+                FileReader ifr = null;
+                try {
+                    ifr = new FileReader(importPath);
+                    JsonValue valuesImported = jsonReader.parse(ifr);
+                    //adding the first child should be sufficient as the other children are the first children's next children.
+                    values.addChild(valuesImported.child());
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } finally {
+                    Utils.closeSilently(ifr);
+                }
+            }
+        }
+        values.remove("imports");
+
         //read main bases
         JsonValue valuesBases = values.get("bases");
         if (valuesBases != null) {
@@ -71,6 +94,28 @@ public class Blog {
                 }
             }
         }
+
+        //read extended post imports
+        JsonValue valuesImportsPost = valuesPost.get("imports");
+        if (valuesImportsPost != null) {
+            for (JsonValue value = valuesImportsPost.child(); value != null; value = value.next()) {
+                if (!value.isString()) {
+                    continue;
+                }
+                String importPath = value.asString();
+                FileReader ifr = null;
+                try {
+                    ifr = new FileReader(importPath);
+                    JsonValue valuesImported = jsonReader.parse(ifr);
+                    valuesPost.addChild(valuesImported.child());
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } finally {
+                    Utils.closeSilently(ifr);
+                }
+            }
+        }
+        valuesPost.remove("imports");
 
         //read extended post bases
         JsonValue valuesBasesPost = valuesPost.get("bases");
@@ -118,6 +163,28 @@ public class Blog {
             } finally {
                 Utils.closeSilently(fr);
             }
+
+            //read the post-specific imports
+            JsonValue valuesImports = post.values.get("imports");
+            if (valuesImports != null) {
+                for (JsonValue value = valuesImports.child(); value != null; value = value.next()) {
+                    if (!value.isString()) {
+                        continue;
+                    }
+                    String importPath = value.asString();
+                    FileReader ifr = null;
+                    try {
+                        ifr = new FileReader(importPath);
+                        JsonValue valuesImported = jsonReader.parse(ifr);
+                        post.values.addChild(valuesImported.child());
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } finally {
+                        Utils.closeSilently(ifr);
+                    }
+                }
+            }
+            post.values.remove("imports");
 
             //read the post-specific bases
             JsonValue valuesBases = post.values.get("bases");

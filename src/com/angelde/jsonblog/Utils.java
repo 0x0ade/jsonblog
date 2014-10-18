@@ -12,8 +12,8 @@ public final class Utils {
     }
 
     public final static String name = "JsonBlog";
-    public final static String version = "0.2";
-    public final static int versionNumber = 1;
+    public final static String version = "0.3";
+    public final static int versionNumber = 2;
 
     public static boolean log = false;
 
